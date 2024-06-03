@@ -17,26 +17,26 @@ func (t *Todoer) ChangePrefix(newPrefix string) {
 
 var Opts = Todoer{prefix: "[TODO]"}
 
-func fancyPrint(message string) {
-	fmt.Println(fmt.Sprintf("%s: \"%s\"", Opts.prefix, message))
+func (t *Todoer) FancyPrint(message string) {
+	fmt.Println(fmt.Sprintf("%s: \"%s\"", t.prefix, message))
 }
 
-func Nil[T any](message ...string) *T {
+func Nil(message ...string) any {
 	if len(message) > 0 {
-		fancyPrint(message[0])
+		Opts.FancyPrint(message[0])
 	}
 	return nil
 }
 
-func NilF[T any](message string) func(...interface{}) *T {
-	return func(_ ...interface{}) *T {
-		return Nil[T](message)
+func NilF(message ...string) func(...any) any {
+	return func(_ ...any) any {
+		return Nil(message...)
 	}
 }
 
 func Error(msgAndMock ...string) error {
 	if len(msgAndMock) > 0 {
-		fancyPrint(msgAndMock[0])
+		Opts.FancyPrint(msgAndMock[0])
 	}
 	if len(msgAndMock) > 1 {
 		return errors.New(msgAndMock[1])
@@ -45,15 +45,15 @@ func Error(msgAndMock ...string) error {
 	return TodoError
 }
 
-func ErrorF(msgAndMock ...string) func(...interface{}) error {
-	return func(_ ...interface{}) error {
+func ErrorF(msgAndMock ...string) func(...any) error {
+	return func(_ ...any) error {
 		return Error(msgAndMock...)
 	}
 }
 
 func String(msgAndMock ...string) string {
 	if len(msgAndMock) > 0 {
-		fancyPrint(msgAndMock[0])
+		Opts.FancyPrint(msgAndMock[0])
 	}
 	if len(msgAndMock) > 1 {
 		return msgAndMock[1]
@@ -62,22 +62,22 @@ func String(msgAndMock ...string) string {
 	return ""
 }
 
-func StringF(msgAndMock ...string) func(...interface{}) string {
-	return func(_ ...interface{}) string {
+func StringF(msgAndMock ...string) func(...any) string {
+	return func(_ ...any) string {
 		return String(msgAndMock...)
 	}
 }
 
 func Ptr[V any](message ...string) *V {
 	if len(message) > 0 {
-		fancyPrint(message[0])
+		Opts.FancyPrint(message[0])
 	}
 
 	return nil
 }
 
-func PtrF[V any](message ...string) func(...interface{}) *V {
-	return func(_ ...interface{}) *V {
+func PtrF[V any](message ...string) func(...any) *V {
+	return func(_ ...any) *V {
 		return Ptr[V](message...)
 	}
 }
