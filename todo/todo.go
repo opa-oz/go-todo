@@ -3,22 +3,34 @@ package todo
 import (
 	"errors"
 	"fmt"
+	"log"
 )
 
 var TodoError = errors.New("This is TODO error")
 
 type Todoer struct {
 	prefix string
+	logger *log.Logger
 }
 
 func (t *Todoer) ChangePrefix(newPrefix string) {
 	t.prefix = newPrefix
 }
 
-var Opts = Todoer{prefix: "[TODO]"}
+func (t *Todoer) AttachLogger(logger *log.Logger) {
+	t.logger = logger
+}
+
+var Opts = Todoer{prefix: "[TODO]: "}
 
 func (t *Todoer) FancyPrint(message string) {
-	fmt.Println(fmt.Sprintf("%s: \"%s\"", t.prefix, message))
+	msg := fmt.Sprintf("%s\"%s\"", t.prefix, message)
+
+	if t.logger != nil {
+		t.logger.Println(msg)
+	} else {
+		fmt.Println()
+	}
 }
 
 func Nil(message ...string) any {
@@ -79,5 +91,11 @@ func Ptr[V any](message ...string) *V {
 func PtrF[V any](message ...string) func(...any) *V {
 	return func(_ ...any) *V {
 		return Ptr[V](message...)
+	}
+}
+
+func T(message ...string) {
+	if len(message) > 0 {
+		Opts.FancyPrint(message[0])
 	}
 }
