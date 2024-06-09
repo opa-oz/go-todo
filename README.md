@@ -2,6 +2,14 @@
 
 Plan now - implement _later_
 
+[![Run test](https://github.com/opa-oz/go-todo/actions/workflows/ci.yaml/badge.svg)](https://github.com/opa-oz/go-todo/actions/workflows/ci.yaml)
+
+## Install
+```bash
+go get github.com/opa-oz/go-todo
+```
+
+
 ## Features
 
 Introducing our prototyping tool designed to streamline your development process!
@@ -13,7 +21,7 @@ a clear roadmap for future development.
 
 Get ready to bring your ideas to life faster than ever before!
 
-### "Magic" strings
+### 1. "Magic" strings
 
 Imagine you need to prefix all your logs.
 It's easy! But what if your function is already in use? Of course, you *need* to refactor it. 
@@ -33,7 +41,8 @@ printFancy("My very important message")
 // [TODO]: Move prefix to function params
 ```
 
-### "Magic" numbers
+
+### 2. "Magic" numbers
 
 What if your task is to refactor famous [fast inverse square root](https://en.wikipedia.org/wiki/Fast_inverse_square_root)?
 
@@ -72,7 +81,8 @@ Q_rsqrt(4.0)
 // [TODO]:Implement fast inverse square root 
 ```
 
-### "I'll do predicate later"
+
+### 3. "I'll do predicate later"
 
 `Bool` is the simplest one to implement
 ```go
@@ -84,7 +94,8 @@ assert.False(t, isOdd(3))
 
 ```
 
-### Custom errors
+
+### 4. Custom errors
 
 What if your code need to return an error, but you aren't sure how specific it should be? Just `todo` it!
 
@@ -106,7 +117,7 @@ assert.NotNil(t, err)
 // [TODO]: Add custom error here
 ```
 
-### Easily prototype math
+### 5. Easily prototype math
 
 _Todo description here+
 
@@ -124,7 +135,9 @@ assert.Equal(t, substract(add(1, 2), 4), 1)
 // [TODO]: "Implement `substract` function"
 ```
 
-## Have fun exploring!
+### 6. And more...
+
+Have fun exploring!
 
 
 ----
